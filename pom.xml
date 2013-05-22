@@ -20,7 +20,7 @@
     <version>0.1.0.M1-SNAPSHOT</version>
 
     <properties>
-        <version.org.eventjuggler.services>0.1.0.20130510-2</version.org.eventjuggler.services>
+        <version.org.eventjuggler.services>0.1.0.M1</version.org.eventjuggler.services>
 
         <version.org.jboss.bom>1.0.4.CR7</version.org.jboss.bom>
         <version.org.jboss.as.plugins.maven.plugin>7.3.Final</version.org.jboss.as.plugins.maven.plugin>
