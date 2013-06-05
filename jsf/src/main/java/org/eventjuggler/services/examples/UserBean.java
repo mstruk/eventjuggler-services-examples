@@ -47,7 +47,7 @@ public class UserBean {
             return null;
         }
 
-        User user = (User) identity.getUser();
+        User user = (User) identity.getAgent();
 
         String name = user.getFirstName();
         name = name != null ? name + " " + user.getLastName() : name;

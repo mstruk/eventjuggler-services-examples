@@ -36,7 +36,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <scope.org.picketlink>provided</scope.org.picketlink>
+        <ejs.url>http://localhost:8080</ejs.url>
     </properties>
 
     <dependencies>
@@ -44,10 +44,6 @@
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eventjuggler.services</groupId>
-            <artifactId>ejs-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eventjuggler.services</groupId>
@@ -59,23 +55,19 @@
         </dependency>
         <dependency>
             <groupId>org.picketlink</groupId>
-            <artifactId>picketlink-core-api</artifactId>
-            <scope>${scope.org.picketlink}</scope>
+            <artifactId>picketlink-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.picketlink</groupId>
-            <artifactId>picketlink-core-impl</artifactId>
-            <scope>${scope.org.picketlink}</scope>
+            <artifactId>picketlink-impl</artifactId>
         </dependency>
         <dependency>
             <groupId>org.picketlink</groupId>
             <artifactId>picketlink-idm-api</artifactId>
-            <scope>${scope.org.picketlink}</scope>
         </dependency>
         <dependency>
             <groupId>org.picketlink</groupId>
             <artifactId>picketlink-idm-impl</artifactId>
-            <scope>${scope.org.picketlink}</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
@@ -111,44 +103,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>saas</id>
-            <activation>
-                <property>
-                    <name>ejs.url</name>
-                </property>
-            </activation>
-            <properties>
-                <scope.org.picketlink>compile</scope.org.picketlink>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <webResources>
-                                <resource>
-                                    <directory>src/main/webapp-saas</directory>
-                                    <filtering>true</filtering>
-                                    <includes>
-                                        <include>WEB-INF/web.xml</include>
-                                    </includes>
-                                </resource>
-                                <resource>
-                                    <directory>src/main/webapp-saas</directory>
-                                    <includes>
-                                        <include>WEB-INF/jboss-deployment-structure.xml</include>
-                                    </includes>
-                                </resource>
-                            </webResources>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>
