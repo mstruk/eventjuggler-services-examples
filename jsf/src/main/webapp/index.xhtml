@@ -6,6 +6,20 @@
 <h:head>
     <title>JSF Example</title>
     <script src="#{initParam['ejs.url']}/ejs-identity/js/login.js"></script>
+    <script>
+        identityBroker.appKey = "#{initParam['ejs.appKey']}";
+        identityBroker.baseUrl = "#{initParam['ejs.url']}/ejs-identity";
+
+        if (identityBroker.token) {
+            sessionStorage.identityBrokerToken = identityBroker.token;
+        } else if (sessionStorage.identityBrokerToken) {
+            if (sessionStorage.identityBrokerToken == 'logout') {
+                sessionStorage.identityBrokerToken = null;
+            } else {            
+                identityBroker.token  = sessionStorage.identityBrokerToken;
+            }
+        }
+    </script>
 </h:head>
 
 <h:body>
@@ -19,17 +33,32 @@
         <div id="login-form"></div>
     
         <script>
-    	    identityBroker.appKey = "#{initParam['ejs.appKey']}";
-        	identityBroker.baseUrl = "#{initParam['ejs.url']}/ejs-identity";
         	identityBroker.renderLoginForm("login-form");
     	</script>
     </h:panelGroup>
 
     <h:panelGroup rendered="#{user.loggedIn}">
-        <p>Logged in #{user.name}</p>
+        <h1>Logged in #{user.name}</h1>
+        
+        <p>User profile:</p>
+        <pre id="userprofile"></pre>
+        <script>
+            identityBroker.getUser(function(user) {
+            	document.getElementById("userprofile").textContent = JSON.stringify(user, undefined, 4);
+            });
+        </script>
 
         <p><a href="index.jsf?token=logout">Logout</a></p>
     </h:panelGroup>
+    
+    <hr/>
+    
+    <p>Configuration:</p>
+    <ul>
+        <li>EJS URL: <script>document.write(identityBroker.baseUrl);</script></li>
+        <li>EJS App Key: <script>document.write(identityBroker.appKey);</script></li>
+        <li>EJS Token: <script>document.write(identityBroker.token);</script></li>
+    </ul>
     
 </h:body>
 
